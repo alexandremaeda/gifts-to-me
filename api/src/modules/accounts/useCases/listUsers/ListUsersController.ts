@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
+import prismaClient from '@prismaDatabase';
 
 export default class ListUsersController {
-  handle(request: Request, response: Response): Response {
-    return response.json({ message: 'Users' });
+  async handle(request: Request, response: Response): Promise<Response> {
+    const foundUsers = await prismaClient.user.findMany();
+
+    return response.json(foundUsers);
   }
 }
