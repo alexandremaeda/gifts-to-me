@@ -1,16 +1,17 @@
 import { Request, Response } from 'express';
-import prismaClient from '@prismaDatabase';
+import CreateUserUseCase from './CreateUserUseCase';
+import { container } from 'tsyringe';
 
 export default class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body;
 
-    const createdUser = await prismaClient.user.create({
-      data: {
-        name,
-        email,
-        password,
-      },
+    const createUserUseCase = container.resolve(CreateUserUseCase);
+
+    const createdUser = await createUserUseCase.execute({
+      name,
+      email,
+      password,
     });
 
     return response.json(createdUser);
