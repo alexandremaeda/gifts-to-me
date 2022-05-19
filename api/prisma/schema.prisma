@@ -13,11 +13,21 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(uuid())
+  id        String      @id @default(uuid())
   name      String
-  email     String @unique
+  email     String      @unique
   password  String
-  isAdmin   Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isAdmin   Boolean     @default(false)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  tokens UserToken[]
+}
+
+model UserToken {
+  id          String   @id @default(uuid())
+  refreshToken String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
 }
