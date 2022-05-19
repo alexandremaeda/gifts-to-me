@@ -1,9 +1,18 @@
 import { Request, Response } from 'express';
+import prismaClient from '@prismaDatabase';
 
 export default class CreateUserController {
-  handle(request: Request, response: Response): Response {
-    const { name } = request.body;
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { name, email, password } = request.body;
 
-    return response.json({ name });
+    const createdUser = await prismaClient.user.create({
+      data: {
+        name,
+        email,
+        password,
+      },
+    });
+
+    return response.json(createdUser);
   }
 }
