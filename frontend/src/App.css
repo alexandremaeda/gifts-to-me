@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1c1e26;
+  font: 14px sans-serif;
+  color: #fff;
+}
+
+.bt-yellow {
+  background-color: #fdeb37 !important;
+  color: #1c1e26 !important;
+}
