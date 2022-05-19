@@ -8,8 +8,7 @@ const usersRouter = Router();
 const listUsersController = new ListUsersController();
 const createUserController = new CreateUserController();
 
-usersRouter.use(ensureAuthenticated);
-usersRouter.get('/', listUsersController.handle);
+usersRouter.get('/', ensureAuthenticated, listUsersController.handle);
 usersRouter.post('/', createUserController.handle);
 
 export default usersRouter;

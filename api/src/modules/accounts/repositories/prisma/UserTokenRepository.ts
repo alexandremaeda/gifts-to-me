@@ -24,7 +24,7 @@ class UserRepository implements IUserTokenRepository {
     userId: string,
     refreshToken: string,
   ): Promise<UserToken | null> {
-    return this.repository.findUnique({ where: { userId, refreshToken } });
+    return this.repository.findFirst({ where: { userId, refreshToken } });
   }
 
   deleteById(id: string): Promise<void> {
